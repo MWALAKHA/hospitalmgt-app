@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard');
+        $userCount = DB::table('users')->count();
+        return view('pages.dashboard',compact('userCount'));
     }
 }
