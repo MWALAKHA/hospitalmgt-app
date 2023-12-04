@@ -35,9 +35,10 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Registered  Users</p>
                                     <h5 class="font-weight-bolder">
-                                        2,300
+                                        {{ $count = DB::table('users')->count();
+                                    }}
                                     </h5>
                                     <p class="mb-0">
                                         <span class="text-success text-sm font-weight-bolder">+3%</span>
@@ -60,9 +61,10 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's New Clients</p>
                                     <h5 class="font-weight-bolder">
-                                        +3,462
+                                        {{ $count = DB::table('users')->whereDate('created_at', today())->count() }}
+
                                     </h5>
                                     <p class="mb-0">
                                         <span class="text-danger text-sm font-weight-bolder">-2%</span>
@@ -85,9 +87,10 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Active <i class="fa fa-users" aria-hidden="true"></i></p>
                                     <h5 class="font-weight-bolder">
-                                        $103,430
+                                        {{ $onlineUsersCount = DB::table('users')->where('created_at', '>', now()->subMinutes(5))->count() }}
+
                                     </h5>
                                     <p class="mb-0">
                                         <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
